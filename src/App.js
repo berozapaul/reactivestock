@@ -3,6 +3,7 @@ import './App.css';
 
 import Header from './components/Header';
 import Search from './components/Search';
+import Stocklist from './components/Stocklist';
 import ModalProvider from './components/ModalProvider';
 
 /*
@@ -16,7 +17,18 @@ class App extends Component {
 
     constructor(props){
         super(props);
-        this.state = {term: ''};
+        this.state = {term: '', stock : []};
+    }
+
+    componentDidMount() {
+        fetch('https://financialmodelingprep.com/api/v3/stock/actives')
+                .then(response =>  response.json())
+        .then(resData => {
+                //console.log(JSON.stringify(resData))
+                //do your logic here
+                //let person = resData.results
+                this.setState({ stock: resData.mostActiveStock }); //this is an asynchronous function
+        });
     }
 
     productSearch = (term) =>{
@@ -34,7 +46,7 @@ class App extends Component {
                      <hr/>
                      <Search onSearchChange=""/>
                   </div>
-                  <hr/>
+                  <Stocklist stocks={this.state.stock}/>
               </div>
           </ModalProvider>
       );
