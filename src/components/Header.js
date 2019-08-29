@@ -1,6 +1,8 @@
 import React from 'react';
 import Modal from './Modal';
 import AuthUser from './AuthUser';
+import {NavLink} from 'react-router-dom';
+
 /*
  * Purpose: The purpose of this component is to render common header.
  *          This component is going to be common to all routes. It is
@@ -19,8 +21,8 @@ const Header = () =>{
                        <a className="navbar-brand" href="/">ReactJS</a>
                    </div>
                    <ul className="nav navbar-nav">
-                       <li className="active"><a href="/">Home</a></li>
-                       <li><a href="#">About</a></li>
+                       <li><NavLink exact to="/" activeClassName="active">Home</NavLink></li>
+                       <li><NavLink exact to="/about" activeClassName="active">About</NavLink></li>
                    </ul>
                    <ul className="nav navbar-nav navbar-right">
                        <li>

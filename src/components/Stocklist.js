@@ -12,7 +12,9 @@ const Stocklist = ({stocks}) => {
     let stocklist = (stocks.length < 1) ? 'Stocks are not available yet.' : '';
     if(Array.isArray(stocks) && stocks.length > 0){
         stocklist = stocks.map((stock) =>
-            <li className="list-group-item" key={stock.companyName}>{stock.companyName}&nbsp; (${stock.price})</li>
+            <li className="list-group-item" key={stock.companyName}>
+                {stock.companyName}&nbsp; (${stock.price})
+            </li>
         )
     }
 
