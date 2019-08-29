@@ -29,7 +29,7 @@
 .overlay {position: fixed;top: 0; right: 0; left: 0; bottom: 0;text-align: center;background-color: rgba(0, 0, 0, 0.3);padding: 64px 32px;}
 .modal {display: inline-block;background-color: white;padding: 24px;position: relative;}
 .nav li a.active{background-color: #e7e7e7 !important;}
-.active-stock{width:30%;margin: 15px 0;}
+.active-stock{width:30%;margin: 15px 15px 0 0 ;}
 
 @keyframes App-logo-spin {
   from {

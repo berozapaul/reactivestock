@@ -10,15 +10,14 @@ import {NavLink} from "react-router-dom";
  * Version: 1.0
  * Author: dev@cefalo.com
  */
-const Stocklist = ({stocks}) => {
+const Stocklist = ({stocks, data}) => {
     let stocklist = (stocks.length < 1) ? 'Stocks are not available yet.' : '';
     if(Array.isArray(stocks) && stocks.length > 0){
-        console.log(stocks);
         stocklist = stocks.map((stock) =>
             <li className="list-group-item" key={stock.companyName}>
                 <div className="flexgrid">
                     <div className="pull-left">
-                        <NavLink exact to={`/company/${strToSlug(stock.companyName)}`} activeClassName="active">{stock.companyName}</NavLink></div>
+                        <NavLink exact to={`/company/${strToSlug(stock.companyName)}-${stock.ticker}`}>{stock.companyName}</NavLink></div>
                     <div>(${stock.price})</div>
                 </div>
             </li>
@@ -26,8 +25,8 @@ const Stocklist = ({stocks}) => {
     }
 
     return(
-        <div className="panel panel-default active-stock">
-        <div className="panel-heading">Active stock</div>
+        <div className="panel panel-default active-stock pull-left">
+        <div className="panel-heading">{data}</div>
            <ul className="list-group">{stocklist}</ul>
         </div>
     )

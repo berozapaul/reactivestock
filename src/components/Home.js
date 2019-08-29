@@ -15,19 +15,22 @@ class Home extends Component {
 
     constructor(props){
         super(props);
-        this.state = {term: '', stock : []};
+        this.state = {term: '', activestock : [], gainerstock: []};
     }
 
     componentDidMount() {
         fetch('https://financialmodelingprep.com/api/v3/stock/actives')
                 .then(response =>  response.json())
         .then(resData => {
-                // console.log(JSON.stringify(resData))
-                // do your logic here
-                // let person = resData.results
                 // this is an asynchronous function
-                this.setState({ stock: resData.mostActiveStock });
+                this.setState({ activestock: resData.mostActiveStock });
         });
+        fetch('https://financialmodelingprep.com/api/v3/stock/gainers')
+            .then(response =>  response.json())
+            .then(resData => {
+                // this is an asynchronous function
+                this.setState({ gainerstock: resData.mostGainerStock });
+            });
     }
 
     productSearch = (term) =>{
@@ -41,7 +44,8 @@ class Home extends Component {
               <h2>Popular stocks</h2>
               <hr/>
               <Search onSearchChange=""/>
-              <Stocklist stocks={this.state.stock}/>
+              <Stocklist stocks={this.state.activestock} data="Active stock"/>
+              <Stocklist stocks={this.state.gainerstock} data="Gainer stock"/>
           </Fragment>
       );
   }

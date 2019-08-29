@@ -1,4 +1,5 @@
 import React from 'react';
+// const queryString = require('query-string');
 
 /*
  * Purpose: The purpose of this component is to render a company profile.
@@ -8,23 +9,28 @@ import React from 'react';
  * Version: 1.0
  * Author: dev@cefalo.com
  */
-function Company() {
-    const [firstName, setFirstName] = React.useState(null);
-    const [lastName, setLastName] = React.useState(null);
+function Company(props) {
+    const [companyName, setCompanyName] = React.useState(null);
+    const [description, setDescription] = React.useState(null);
 
     React.useEffect(() => {
-        fetch('https://randomuser.me/api/')
+        let companySlug = props.match.params.slug;
+        let ticker = companySlug.split('-').pop();
+
+        fetch('https://financialmodelingprep.com/api/v3/company/profile/' + ticker)
             .then(results => results.json())
             .then(data => {
-                const {name} = data.results[0];
-                setFirstName(name.first);
-                setLastName(name.last);
+                setCompanyName(data.profile.companyName);
+                setDescription(data.profile.description);
             });
     }, []); // <-- Have to pass in [] here!
 
     return (
         <div>
-            Name: {!firstName || !lastName ? 'Loading...' : `${firstName} ${lastName}`}
+            Name: {companyName}
+            <div>
+            Description: {description}
+            </div>
         </div>
     );
 }
