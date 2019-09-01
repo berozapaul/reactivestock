@@ -10,6 +10,14 @@ const isValidUrl = (url) => {
         '(\\?[;&a-z\\d%_.~+=-]*)?'+ // query string
         '(\\#[-a-z\\d_]*)?$','i'); // fragment locator
     return pattern.test(url);
-}
+};
 
-export { getRandomInt, isValidUrl };
+const strToSlug = (str) => {
+    return str
+        .toLowerCase()
+        .replace(/ /g,'-')
+        .replace(/[^\w-]+/g,'')
+        ;
+};
+
+export { getRandomInt, isValidUrl, strToSlug };

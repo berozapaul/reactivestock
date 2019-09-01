@@ -1,5 +1,6 @@
 import React from 'react';
 import AppContext from '../AppContext';
+import {NavLink} from "react-router-dom";
 /*
  * Purpose: The purpose of this component is to handle user login, logout
  *          using React Context API.
@@ -16,7 +17,7 @@ const AuthUser = () =>  (
                 // Fragments let us group a list of children without adding extra nodes to the DOM.
                 <React.Fragment>
                     <ul className="nav navbar-nav">
-                        <li><a href="/">Welcome {context.state.user.username}</a></li>
+                        <li><NavLink exact to="/" activeClassName="active">Welcome {context.state.user.username}</NavLink></li>
                         <li><a href="#" onClick={context.handleLogout}><span className="glyphicon glyphicon-log-out"></span> Logout</a></li>
                     </ul>
                 </React.Fragment>
