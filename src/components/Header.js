@@ -18,11 +18,12 @@ const Header = () =>{
            <nav className="navbar navbar-default">
                <div className="container-fluid">
                    <div className="navbar-header">
-                       <a className="navbar-brand" href="/">ReactJS</a>
+                       <NavLink exact to="/" className="navbar-brand">Reactive stock</NavLink>
                    </div>
                    <ul className="nav navbar-nav">
                        <li><NavLink exact to="/" activeClassName="active">Home</NavLink></li>
                        <li><NavLink exact to="/about" activeClassName="active">About</NavLink></li>
+                       <li><NavLink exact to="/profile" activeClassName="active">Profile</NavLink></li>
                    </ul>
                    <ul className="nav navbar-nav navbar-right">
                        <li>

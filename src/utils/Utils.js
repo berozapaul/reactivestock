@@ -1,3 +1,5 @@
+import Cookies from 'js-cookie';
+
 const getRandomInt = (max) => {
     return Math.floor(Math.random() * Math.floor(max));
 };
@@ -16,8 +18,36 @@ const strToSlug = (str) => {
     return str
         .toLowerCase()
         .replace(/ /g,'-')
-        .replace(/[^\w-]+/g,'')
-        ;
+        .replace(/[^\w-]+/g,'');
 };
 
-export { getRandomInt, isValidUrl, strToSlug };
+const setUserInfoCookie = (userObj) => {
+    let userSlug = strToSlug(userObj.username);
+    Cookies.set('logged_in_user', userSlug);
+    saveUserPreference(userObj)
+};
+
+const saveUserPreference = (userObj) => {
+    if(userObj){
+        let userSlug = strToSlug(userObj.username);
+        Cookies.set(userSlug, userObj);
+    }
+};
+
+const getUserCookieInfo = () => {
+    let loggedinUser, userData = '';
+    loggedinUser = Cookies.get('logged_in_user');
+    if(loggedinUser){
+        userData = JSON.parse(Cookies.get(loggedinUser));
+    }
+    return userData;
+};
+
+const isEmptyObject = (obj) => {
+    return  Object.entries(obj).length === 0 && obj.constructor === Object;
+};
+
+
+
+export { getRandomInt, isValidUrl, strToSlug, setUserInfoCookie,
+    getUserCookieInfo, saveUserPreference, isEmptyObject};
