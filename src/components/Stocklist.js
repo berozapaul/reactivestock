@@ -16,10 +16,12 @@ const Stocklist = ({stocks, data}) => {
     if(Array.isArray(stocks) && stocks.length > 0){
         stocklist = stocks.map((stock) =>
             <li className="list-group-item" key={stock.ticker}>
-                <div className="flexgrid clearfix">
+                <div className="flexgrid clearfix item-container">
                     <div className="pull-left each-item">
                         <img width="30" src={`${apiUrl}/stocks/${stock.ticker.toLowerCase()}.png`}/>
-                        <NavLink exact to={`/company/${strToSlug(stock.companyName)}-${stock.ticker}`}>{stock.companyName}</NavLink></div>
+                        <NavLink exact to={`/company/${strToSlug(stock.companyName)}-${stock.ticker}`}>{stock.companyName}</NavLink>
+                    </div>
+                    <i className="fas fa-thumbs-up" title="Add to favourite"></i>
                     <div className="pull-right">${stock.price}</div>
                 </div>
             </li>

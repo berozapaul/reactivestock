@@ -35,6 +35,8 @@
 .active-stock{width:30%;margin: 15px 15px 0 0 ;}
 
 .panel-default>.panel-heading {font-weight: bold;font-size:16px;}
+.item-container i{cursor: pointer;margin-left: 10px;display: none;font-size:17px;}
+.item-container:hover i{display: inline;}
 .each-item {width: 140px; overflow: hidden; text-decoration: none; text-overflow: ellipsis; white-space: nowrap;}
 .each-item img{margin-right:15px;}
 
