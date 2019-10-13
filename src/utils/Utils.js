@@ -47,7 +47,5 @@ const isEmptyObject = (obj) => {
     return  Object.entries(obj).length === 0 && obj.constructor === Object;
 };
 
-
-
 export { getRandomInt, isValidUrl, strToSlug, setUserInfoCookie,
     getUserCookieInfo, saveUserPreference, isEmptyObject};

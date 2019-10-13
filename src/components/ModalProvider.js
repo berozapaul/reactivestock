@@ -15,7 +15,7 @@ class ModalProvider extends Component {
         super(...args);
         let userCookieObj = getUserCookieInfo() || {};
         let userObj = isEmptyObject(userCookieObj) ? "" : userCookieObj;
-        this.state = { openModalId: '', user: userObj };
+        this.state = { openModalId: '', user: userObj, theme: 'light' };
     }
 
     openModal(event) {
@@ -43,6 +43,11 @@ class ModalProvider extends Component {
         });
     }
 
+    toggleTheme(event){
+        let themeValue = this.state.theme == 'light' ? 'dark' : 'light';
+        this.setState({ theme: themeValue});
+    }
+
     render() {
         return (
             <AppContext.Provider value={{
@@ -50,6 +55,7 @@ class ModalProvider extends Component {
                 openModal: (e) => this.openModal(e),
                 handleLogin: (e) => this.handleLogin(e),
                 handleLogout: () => this.handleLogout(),
+                toggleTheme: () => this.toggleTheme(),
                 closeModal: () => this.closeModal()
             }}>
                 {this.props.children}

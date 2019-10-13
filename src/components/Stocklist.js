@@ -11,14 +11,16 @@ import {NavLink} from "react-router-dom";
  * Author: dev@cefalo.com
  */
 const Stocklist = ({stocks, data}) => {
+    let apiUrl = 'https://financialmodelingprep.com';
     let stocklist = (stocks.length < 1) ? 'Stocks are not available yet.' : '';
     if(Array.isArray(stocks) && stocks.length > 0){
         stocklist = stocks.map((stock) =>
-            <li className="list-group-item" key={stock.companyName}>
-                <div className="flexgrid">
-                    <div className="pull-left">
+            <li className="list-group-item" key={stock.ticker}>
+                <div className="flexgrid clearfix">
+                    <div className="pull-left each-item">
+                        <img width="30" src={`${apiUrl}/stocks/${stock.ticker.toLowerCase()}.png`}/>
                         <NavLink exact to={`/company/${strToSlug(stock.companyName)}-${stock.ticker}`}>{stock.companyName}</NavLink></div>
-                    <div>(${stock.price})</div>
+                    <div className="pull-right">${stock.price}</div>
                 </div>
             </li>
         )

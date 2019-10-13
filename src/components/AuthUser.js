@@ -24,9 +24,12 @@ const AuthUser = () =>  (
                 )
             }
             return (
-                    <a href="#" onClick={context.openModal} id="signinForm">
-                        <span className="glyphicon glyphicon-log-in"></span> Login
-                    </a>
+                <React.Fragment>
+                    <ul className="nav navbar-nav">
+                        <li><a href="#" onClick={context.toggleTheme}><i className={"fas " + (context.state.theme == 'light' ? "fa-sun" : "fa-moon")}></i> Theme</a></li>
+                        <li><a href="#" onClick={context.openModal} id="signinForm"><i className="fas fa-sign-in-alt"></i> Login</a></li>
+                    </ul>
+                </React.Fragment>
                 )
             }
         }
@@ -34,3 +37,4 @@ const AuthUser = () =>  (
 );
 
 export default AuthUser;
+

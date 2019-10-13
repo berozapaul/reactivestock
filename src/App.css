@@ -22,6 +22,9 @@
 .App-link {
   color: #61dafb;
 }
+.main-container .light{background-color: #fff;color:#333;}
+.main-container .dark{background-color: #121212;color:#fff;}
+
 .reactjs-app.container{max-width: 980px;}
 .container.main-container{padding: 0px 0;}
 .img-responsive{width: 100%;display: inline-block;}
@@ -30,6 +33,10 @@
 .modal {display: inline-block;background-color: white;padding: 24px;position: relative;}
 .nav li a.active{background-color: #e7e7e7 !important;}
 .active-stock{width:30%;margin: 15px 15px 0 0 ;}
+
+.panel-default>.panel-heading {font-weight: bold;font-size:16px;}
+.each-item {width: 140px; overflow: hidden; text-decoration: none; text-overflow: ellipsis; white-space: nowrap;}
+.each-item img{margin-right:15px;}
 
 @keyframes App-logo-spin {
   from {
