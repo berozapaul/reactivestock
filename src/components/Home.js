@@ -2,7 +2,11 @@ import React, {Component, Fragment} from 'react';
 
 import Search from './Search';
 import Stocklist from './Stocklist';
-import {getUserCookieInfo} from "../utils/Utils";
+import Favorite from './Favorite';
+import Majorindex from './Majorindex';
+import {getUserCookieInfo, uniqueArrObject} from "../utils/Utils";
+import { Provider } from 'react-redux';
+import { createStore } from 'redux';
 
 /*
  * Purpose: App component is the entry point. It initializes the states.
@@ -12,10 +16,26 @@ import {getUserCookieInfo} from "../utils/Utils";
  * Author: dev@cefalo.com
  */
 
+const initial = [];
+
+function reducer(state = initial, action) {
+    switch(action.type) {
+        case 'ADD':
+            state.push(action.data);
+            let uniqueArr = uniqueArrObject(state, 'ticker');
+            return [...uniqueArr];
+
+        default:
+            return state;
+    }
+}
+
+const store = createStore(reducer);
+
 class Home extends Component {
     constructor(props){
         super(props);
-        this.state = {term: '', activestock : [], gainerstock: [], loserstock: []};
+        this.state = {term: '', activestock : [], gainerstock: [], loserstock: [], majorindex: []};
     }
 
     componentDidMount() {
@@ -37,6 +57,12 @@ class Home extends Component {
                 // this is an asynchronous function
                 this.setState({ loserstock: resData.mostLoserStock });
             });
+        fetch('https://financialmodelingprep.com/api/v3/majors-indexes')
+            .then(response =>  response.json())
+            .then(resData => {
+                // this is an asynchronous function
+                this.setState({ majorindex: resData.majorIndexesList });
+            });
     }
 
     productSearch = (term) =>{
@@ -47,14 +73,15 @@ class Home extends Component {
   render() {
       let userObj = getUserCookieInfo() || {};
       return (
-          <Fragment>
-              <h2>Popular stocks</h2>
-              <hr/>
-              <Search onSearchChange=""/>
+          <Provider store={store}>
+              <h4>Major indexes</h4>
+              <Majorindex stocks={this.state.majorindex}/>
+
               {userObj.hideActive ? null : <Stocklist stocks={this.state.activestock} data="Active stock"/>  }
               <Stocklist stocks={this.state.gainerstock} data="Gainer stock"/>
               <Stocklist stocks={this.state.loserstock} data="Loser stock"/>
-          </Fragment>
+              <Favorite/>
+          </Provider>
       );
   }
 }

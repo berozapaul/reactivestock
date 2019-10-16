@@ -47,5 +47,14 @@ const isEmptyObject = (obj) => {
     return  Object.entries(obj).length === 0 && obj.constructor === Object;
 };
 
+const uniqueArrObject = (obj, field) => {
+    let resArr = [];
+    obj.filter(function(item){
+        var i = resArr.findIndex(x => (x[field] == item[field]));
+        if(i <= -1) resArr.push(item);
+    });
+    return resArr;
+};
+
 export { getRandomInt, isValidUrl, strToSlug, setUserInfoCookie,
-    getUserCookieInfo, saveUserPreference, isEmptyObject};
+    getUserCookieInfo, saveUserPreference, isEmptyObject, uniqueArrObject};
