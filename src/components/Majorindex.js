@@ -1,8 +1,7 @@
-import React  from 'react';
+import React, {Fragment} from 'react';
 
 function Majorindex({stocks}){
     let stocklist = (stocks.length < 1) ? 'Stocks are not available yet.' : '';
-    console.log(stocks);
     if(Array.isArray(stocks) && stocks.length > 0){
         stocklist = stocks.map((stock) =>
             <span className={stock.changes > 0 ? "green" :  "red"}>
@@ -12,11 +11,14 @@ function Majorindex({stocks}){
         )
     }
     return (
-        <div className="mqcontainer">
-            <div className="sitemessage indexitem">
-                {stocklist}
+        <Fragment>
+            <h4>Major indexes</h4>
+            <div className="mqcontainer">
+                <div className="sitemessage indexitem">
+                    {stocklist}
+                </div>
             </div>
-        </div>
+        </Fragment>
     );
 }
 export default Majorindex;

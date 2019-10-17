@@ -40,7 +40,7 @@
 .each-item {width: 140px; overflow: hidden; text-decoration: none; text-overflow: ellipsis; white-space: nowrap;}
 .each-item img{margin-right:15px;}
 
-.mqcontainer{width: 100%;overflow: hidden;}
+.mqcontainer{width: 100%;overflow: hidden;background: #fbfbfb;padding: 15px 0;border-radius: 3px;}
 .sitemessage {display: inline-block; white-space: nowrap; animation: floatText 90s infinite linear;padding-left: 100%;}
 .sitemessage:hover {animation-play-state: paused;}
 @keyframes floatText {
@@ -52,6 +52,8 @@
 .indexitem .green{color:lightgreen;}
 .indexitem .red{color:orangered;}
 .indexitem span{margin-right:30px;}
+
+.search-container{margin-top: 15px;}
 
 @keyframes App-logo-spin {
   from {

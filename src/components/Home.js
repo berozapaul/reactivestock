@@ -35,7 +35,8 @@ const store = createStore(reducer);
 class Home extends Component {
     constructor(props){
         super(props);
-        this.state = {term: '', activestock : [], gainerstock: [], loserstock: [], majorindex: []};
+        this.state = {term: '', activestock : [], gainerstock: [], loserstock: [],
+            majorindex: [], allstock: []};
     }
 
     componentDidMount() {
@@ -44,18 +45,21 @@ class Home extends Component {
         .then(resData => {
                 // this is an asynchronous function
                 this.setState({ activestock: resData.mostActiveStock });
+                this.setState({ allstock: [...this.state.allstock, ...resData.mostActiveStock] });
         });
         fetch('https://financialmodelingprep.com/api/v3/stock/gainers')
             .then(response =>  response.json())
             .then(resData => {
                 // this is an asynchronous function
                 this.setState({ gainerstock: resData.mostGainerStock });
+                this.setState({ allstock: [...this.state.allstock, ...resData.mostGainerStock] });
             });
         fetch('https://financialmodelingprep.com/api/v3/stock/losers')
             .then(response =>  response.json())
             .then(resData => {
                 // this is an asynchronous function
                 this.setState({ loserstock: resData.mostLoserStock });
+                this.setState({ allstock: [...this.state.allstock, ...resData.mostLoserStock] });
             });
         fetch('https://financialmodelingprep.com/api/v3/majors-indexes')
             .then(response =>  response.json())
@@ -65,18 +69,12 @@ class Home extends Component {
             });
     }
 
-    productSearch = (term) =>{
-        // Change the state so that render gets called per search query.
-        this.setState({term: term});
-    };
-
   render() {
       let userObj = getUserCookieInfo() || {};
       return (
           <Provider store={store}>
-              <h4>Major indexes</h4>
               <Majorindex stocks={this.state.majorindex}/>
-
+              <Search stocks={this.state.allstock}/>
               {userObj.hideActive ? null : <Stocklist stocks={this.state.activestock} data="Active stock"/>  }
               <Stocklist stocks={this.state.gainerstock} data="Gainer stock"/>
               <Stocklist stocks={this.state.loserstock} data="Loser stock"/>
