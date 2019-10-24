@@ -16,7 +16,7 @@ const Header = () =>{
    return(
        <div>
            <nav className="navbar navbar-default">
-               <div className="container-fluid">
+               <div className="container-fluid stock-container">
                    <div className="navbar-header">
                        <NavLink exact to="/" className="navbar-brand">Reactive stock</NavLink>
                    </div>

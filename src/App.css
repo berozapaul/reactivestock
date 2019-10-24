@@ -22,10 +22,12 @@
 .App-link {
   color: #61dafb;
 }
+
+.stock-container{max-width: 1024px;margin: 0 auto;padding:0;}
 .main-container .light{background-color: #fff;color:#333;}
 .main-container .dark{background-color: #121212;color:#fff;}
 
-.reactjs-app.container{max-width: 980px;}
+.reactjs-app.container{width: 100%;padding:0;}
 .container.main-container{padding: 0px 0;}
 .img-responsive{width: 100%;display: inline-block;}
 

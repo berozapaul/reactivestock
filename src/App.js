@@ -19,12 +19,14 @@ function App(){
                       <div className="reactjs-app container">
                           <BrowserRouter>
                               <Header/>
+                              <div className="stock-container">
                               <Switch>
                                   <Route path="/" exact component={Home}></Route>
                                   <Route path="/about" component={About}></Route>
                                   <Route path="/profile" component={Profile}></Route>
                                   <Route path="/company/:slug" component={Company}></Route>
                               </Switch>
+                              </div>
                           </BrowserRouter>
                       </div>
                   </div>

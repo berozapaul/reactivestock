@@ -1,29 +1,36 @@
-import React, {Component} from 'react'
+import React, {Component} from 'react';
+import AutoComplete  from 'material-ui/AutoComplete';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import { withRouter } from "react-router-dom";
 
 class Search extends Component{
-    state = {searchTerm: ''}
+    state = {searchTerm: ''};
+    dataSourceConfig = {text: "companyName"};
 
-    onInputChange(searchTerm){
-        this.setState({searchTerm});
-        console.log(this.props.stocks);
-    }
-
+    handleNewRequest = (value) => {
+        this.props.history.push("/company/nvr-inc-NVR");
+    };
     render(){
         return (
+
             <div className="row search-container">
                 <div className="col-xs-12">
                      <h4>Search stocks</h4>
                      <div className="form-row">
-                         <input
-                                onChange={event => this.onInputChange(event.target.value)}
-                                value={this.state.searchTerm} type="text" placeholder="Type stock name"
-                                className="form-control form-control-lg"/>
+                         <MuiThemeProvider>
+                             <AutoComplete
+                                 floatingLabelText="Same text, different values"
+                                 onNewRequest={this.handleNewRequest}
+                                 openOnFocus={true}
+                                 dataSource={this.props.stocks}
+                                 dataSourceConfig={this.dataSourceConfig}/>
+                         </MuiThemeProvider>
                      </div>
                 </div>
             </div>
         )
     }
-
 }
 
-export default Search
+export default withRouter(Search)
+
