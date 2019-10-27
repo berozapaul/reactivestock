@@ -3,7 +3,6 @@ import React, {Component, Fragment} from 'react';
 import Search from './Search';
 import Stocklist from './Stocklist';
 import Favorite from './Favorite';
-import Majorindex from './Majorindex';
 import {getUserCookieInfo, uniqueArrObject} from "../utils/Utils";
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
@@ -19,12 +18,16 @@ import { createStore } from 'redux';
 const initial = [];
 
 function reducer(state = initial, action) {
+    let uniqueData;
     switch(action.type) {
         case 'ADD':
             state.push(action.data);
-            let uniqueArr = uniqueArrObject(state, 'ticker');
-            return [...uniqueArr];
-
+            uniqueData = uniqueArrObject(state, 'ticker');
+            return [...uniqueData];
+        case 'REMOVE':
+            state.splice(action.data, 1);
+            uniqueData = uniqueArrObject(state, 'ticker');
+            return [...uniqueData];
         default:
             return state;
     }
@@ -59,13 +62,7 @@ class Home extends Component {
             .then(resData => {
                 // this is an asynchronous function
                 this.setState({ loserstock: resData.mostLoserStock });
-                this.setState({ allstock: [...this.state.allstock, ...resData.mostLoserStock] });
-            });
-        fetch('https://financialmodelingprep.com/api/v3/majors-indexes')
-            .then(response =>  response.json())
-            .then(resData => {
-                // this is an asynchronous function
-                this.setState({ majorindex: resData.majorIndexesList });
+                this.setState({ allstock: uniqueArrObject([...this.state.allstock, ...resData.mostLoserStock], 'ticker') });
             });
     }
 
@@ -73,12 +70,15 @@ class Home extends Component {
       let userObj = getUserCookieInfo() || {};
       return (
           <Provider store={store}>
-              <Majorindex stocks={this.state.majorindex}/>
-              <Search stocks={this.state.allstock}/>
-              {userObj.hideActive ? null : <Stocklist stocks={this.state.activestock} data="Active stock"/>  }
-              <Stocklist stocks={this.state.gainerstock} data="Gainer stock"/>
-              <Stocklist stocks={this.state.loserstock} data="Loser stock"/>
-              <Favorite/>
+              <div className="stock-container">
+                  <Search stocks={this.state.allstock}/>
+                  <div className="row">
+                      {userObj.hideActive ? null : <Stocklist stocks={this.state.activestock} data={{user:userObj, label: "Active stock"}}/>}
+                      <Stocklist stocks={this.state.gainerstock} data={{user:userObj, label: "Gainer stock"}}/>
+                      {userObj.username ? '' :  <Stocklist stocks={this.state.loserstock} data={{user:userObj, label: "Loser stock"}}/>}
+                      {userObj.username ? <Favorite data={{user:userObj, label: "My favorite stock"}}/> :  '' }
+                  </div>
+              </div>
           </Provider>
       );
   }

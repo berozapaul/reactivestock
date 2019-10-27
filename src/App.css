@@ -22,8 +22,8 @@
 .App-link {
   color: #61dafb;
 }
-
-.stock-container{max-width: 1024px;margin: 0 auto;padding:0;}
+.header-container{background: #fbfbfb;padding: 5px 0;}
+.stock-container{max-width: 980px;margin: 0 auto;padding:0;}
 .main-container .light{background-color: #fff;color:#333;}
 .main-container .dark{background-color: #121212;color:#fff;}
 
@@ -34,7 +34,8 @@
 .overlay {position: fixed;top: 0; right: 0; left: 0; bottom: 0;text-align: center;background-color: rgba(0, 0, 0, 0.3);padding: 64px 32px;}
 .modal {display: inline-block;background-color: white;padding: 24px;position: relative;}
 .nav li a.active{background-color: #e7e7e7 !important;}
-.active-stock{width:30%;margin: 15px 15px 0 0 ;}
+.navbar {border-radius: 0;margin-bottom: 0; }
+.active-stock{width:33%;margin: 15px 15px 0 0 ;}
 
 .panel-default>.panel-heading {font-weight: bold;font-size:16px;}
 .item-container i{cursor: pointer;margin-left: 10px;display: none;font-size:17px;}
@@ -42,8 +43,8 @@
 .each-item {width: 140px; overflow: hidden; text-decoration: none; text-overflow: ellipsis; white-space: nowrap;}
 .each-item img{margin-right:15px;}
 
-.mqcontainer{width: 100%;overflow: hidden;background: #fbfbfb;padding: 15px 0;border-radius: 3px;}
-.sitemessage {display: inline-block; white-space: nowrap; animation: floatText 90s infinite linear;padding-left: 100%;}
+.mqcontainer{width: 100%;overflow: hidden;}
+.sitemessage {display: inline-block; white-space: nowrap; animation: floatText 180s infinite linear;padding-left: 100%;}
 .sitemessage:hover {animation-play-state: paused;}
 @keyframes floatText {
   to {
@@ -55,7 +56,10 @@
 .indexitem .red{color:orangered;}
 .indexitem span{margin-right:30px;}
 
-.search-container{margin-top: 15px;}
+.search-container label{font-weight: normal;}
+.list-group p{padding: 10px;}
+.top-offset{margin-top:50px;}
+.company-info h1{margin-top: 0;}
 
 @keyframes App-logo-spin {
   from {

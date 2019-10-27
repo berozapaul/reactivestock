@@ -1,5 +1,5 @@
 import React from 'react';
-import {strToSlug} from './../utils/Utils';
+import {strToSlug, getUniqueKey} from './../utils/Utils';
 import {NavLink} from "react-router-dom";
 import {connect} from "react-redux";
 
@@ -10,17 +10,17 @@ import {connect} from "react-redux";
  */
 const Stocklist = ({stocks, data, dispatch}) => {
     let apiUrl = 'https://financialmodelingprep.com';
-    let stocklist = (stocks.length < 1) ? 'Stocks are not available yet.' : '';
+    let stocklist = (stocks.length < 1) ? <p>Stocks are not available yet.</p> : '';
 
     if(Array.isArray(stocks) && stocks.length > 0){
-        stocklist = stocks.map((stock) =>
-            <li className="list-group-item" key={stock.ticker}>
+        stocklist = stocks.map((stock, key) =>
+            <li className="list-group-item" key={getUniqueKey()}>
                 <div className="flexgrid clearfix item-container">
                     <div className="pull-left each-item" >
                         <img width="30" src={`${apiUrl}/stocks/${stock.ticker.toLowerCase()}.png`}/>
                         <NavLink exact to={`/company/${strToSlug(stock.companyName)}-${stock.ticker}`}>{stock.companyName}</NavLink>
                     </div>
-                    <i onClick={() => dispatch({ type: 'ADD', data: stock })} className="fas fa-thumbs-up" title="Add to favourite"></i>
+                    {(data.user.username !== undefined) ? data.label != 'My favorite stock' ? <i onClick={() => dispatch({ type: 'ADD', data: stock })} className="fas fa-thumbs-up" title="Add to favourite"></i> : <i onClick={() => dispatch({ type: 'REMOVE', data: key })} className="fas fa-trash" title="Remove from favourite"></i> : ''}
                     <div className="pull-right">${stock.price}</div>
                 </div>
             </li>
@@ -28,14 +28,15 @@ const Stocklist = ({stocks, data, dispatch}) => {
     }
 
     return(
-        <div className="panel panel-default active-stock pull-left">
-        <div className="panel-heading">{data}</div>
-           <ul className="list-group">{stocklist}</ul>
+        <div className="col-xs-4">
+            <div className="panel panel-default">
+               <div className="panel-heading">{data.label}</div>
+               <ul className="list-group">{stocklist}</ul>
+            </div>
         </div>
     )
 };
 
-// export default Stocklist;
 function mapStateToProps(state) {
     return {state};
 }

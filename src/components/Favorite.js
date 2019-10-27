@@ -3,21 +3,17 @@ import { connect } from 'react-redux';
 import Stocklist from "./Stocklist";
 
 class Favorite extends React.Component {
-    remove = () => {
-        this.props.dispatch({ type: 'REMOVE', data: {slug: 'BL', price: 50} });
-    };
 
     render() {
         return (
             <div>
-                <Stocklist stocks={this.props.storeData} data="My favorite stock"/>
+                <Stocklist stocks={this.props.storeData} data={this.props.data}/>
             </div>
         )
     }
 }
 
 function mapStateToProps(state) {
-    // console.log(state)
   return {
       storeData: state
   };

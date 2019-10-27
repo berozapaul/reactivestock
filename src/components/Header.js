@@ -1,7 +1,8 @@
-import React from 'react';
+import React, {Fragment} from 'react';
 import Modal from './Modal';
 import AuthUser from './AuthUser';
 import {NavLink} from 'react-router-dom';
+import {getUserCookieInfo} from "../utils/Utils";
 
 /*
  * Purpose: The purpose of this component is to render common header.
@@ -13,8 +14,9 @@ import {NavLink} from 'react-router-dom';
  */
 
 const Header = () =>{
+    let userObj = getUserCookieInfo() || {};
    return(
-       <div>
+       <Fragment>
            <nav className="navbar navbar-default">
                <div className="container-fluid stock-container">
                    <div className="navbar-header">
@@ -23,7 +25,7 @@ const Header = () =>{
                    <ul className="nav navbar-nav">
                        <li><NavLink exact to="/" activeClassName="active">Home</NavLink></li>
                        <li><NavLink exact to="/about" activeClassName="active">About</NavLink></li>
-                       <li><NavLink exact to="/profile" activeClassName="active">Profile</NavLink></li>
+                       {(userObj.username) ? <li><NavLink exact to="/profile" activeClassName="active">Profile</NavLink></li> : ''}
                    </ul>
                    <ul className="nav navbar-nav navbar-right">
                        <li>
@@ -49,7 +51,7 @@ const Header = () =>{
                    </React.Fragment>
                )}
            </Modal>
-       </div>
+       </Fragment>
    )
 };
 export default Header;
