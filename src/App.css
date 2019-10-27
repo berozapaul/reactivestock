@@ -27,7 +27,7 @@
 .main-container .light{background-color: #fff;color:#333;}
 .main-container .dark{background-color: #121212;color:#fff;}
 
-.reactjs-app.container{width: 100%;padding:0;}
+.reactjs-app.container{width: 100%;}
 .container.main-container{padding: 0px 0;}
 .img-responsive{width: 100%;display: inline-block;}
 
@@ -56,10 +56,14 @@
 .indexitem .red{color:orangered;}
 .indexitem span{margin-right:30px;}
 
+.dark .form-row input, .dark .form-row label{color:#fff !important;}
 .search-container label{font-weight: normal;}
 .list-group p{padding: 10px;}
 .top-offset{margin-top:50px;}
 .company-info h1{margin-top: 0;}
+.navbar-nav{margin:0;}
+.company-chart{background-color: #fff;color:#333;}
+.main-container .dark i, .main-container .dark .pull-right{background-color: #fff;color:#333;}
 
 @keyframes App-logo-spin {
   from {
@@ -68,4 +72,9 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+
+@media screen and (min-width: 768px) {
+  .reactjs-app.container{padding:0;}
 }

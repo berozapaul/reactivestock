@@ -40,7 +40,7 @@ class Company extends React.Component {
                         <h4>Changes: {this.state.company.changesPercentage}</h4>
                     </div>
                 </div> : ''}
-                <div className="row top-offset">
+                <div className="row top-offset company-chart">
                 {this.state.chartData.length > 0 ? <TypeChooser>{type => <Chart type={type} data={this.state.chartData} />}</TypeChooser> : ''}
                 </div>
             </Fragment>

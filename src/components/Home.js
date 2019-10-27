@@ -70,7 +70,6 @@ class Home extends Component {
       let userObj = getUserCookieInfo() || {};
       return (
           <Provider store={store}>
-              <div className="stock-container">
                   <Search stocks={this.state.allstock}/>
                   <div className="row">
                       {userObj.hideActive ? null : <Stocklist stocks={this.state.activestock} data={{user:userObj, label: "Active stock"}}/>}
@@ -78,7 +77,6 @@ class Home extends Component {
                       {userObj.username ? '' :  <Stocklist stocks={this.state.loserstock} data={{user:userObj, label: "Loser stock"}}/>}
                       {userObj.username ? <Favorite data={{user:userObj, label: "My favorite stock"}}/> :  '' }
                   </div>
-              </div>
           </Provider>
       );
   }

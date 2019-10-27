@@ -28,7 +28,7 @@ const Stocklist = ({stocks, data, dispatch}) => {
     }
 
     return(
-        <div className="col-xs-4">
+        <div className="col-sm-4 col-xs-12">
             <div className="panel panel-default">
                <div className="panel-heading">{data.label}</div>
                <ul className="list-group">{stocklist}</ul>
