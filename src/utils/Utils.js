@@ -62,5 +62,29 @@ const getUniqueKey = () => {
     );
 };
 
+export function getStockData(ticker) {
+    let urls = ['https://financialmodelingprep.com/api/v3/stock/actives',
+        'https://financialmodelingprep.com/api/v3/stock/gainers',
+        'https://financialmodelingprep.com/api/v3/stock/losers'];
+
+    return Promise.all(urls.map(url => fetch(url).then(resp => resp.json())))
+        .then(jsondata => {
+            let mostActiveStock = [], mostGainerStock = [], mostLoserStock = [], allstock = [];
+            if (!isEmptyObject(jsondata[0])) {
+                mostActiveStock = jsondata[0].mostActiveStock;
+            }
+
+            if (!isEmptyObject(jsondata[1])) {
+                mostGainerStock = jsondata[1].mostGainerStock;
+            }
+
+            if (!isEmptyObject(jsondata[2])) {
+                mostLoserStock = jsondata[2].mostLoserStock;
+            }
+            allstock = uniqueArrObject([...mostActiveStock, ...mostGainerStock, ...mostLoserStock], 'ticker');
+            return {mostActiveStock, mostGainerStock, mostLoserStock, allstock};
+        });
+}
+
 export { getRandomInt, isValidUrl, strToSlug, setUserInfoCookie, getUniqueKey,
     getUserCookieInfo, saveUserPreference, isEmptyObject, uniqueArrObject};
