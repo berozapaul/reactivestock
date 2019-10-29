@@ -10,7 +10,8 @@ import {NavLink} from "react-router-dom";
 
 const AuthUser = () =>  (
     <AppContext.Consumer>
-        {(context) => { // Consumer requires a function as a child
+        {(context) => {
+            // Consumer requires a function as a child
             // Check if the user is logged in or not
             if(context.state.user){
                 return (

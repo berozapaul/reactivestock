@@ -38,7 +38,7 @@ const Header = () =>{
                {(context) => (
                    <React.Fragment>
                        <form onSubmit={context.handleLogin}>
-                           <h2>Welcome to reactive stock app!!</h2>
+                           <h2>Welcome to reactivestock app.</h2>
                            <div className="form-group">
                                 <input name="username" placeholder="Username" className="form-control" type="text" />
                            </div>

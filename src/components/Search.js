@@ -21,6 +21,7 @@ class Search extends Component{
                          <MuiThemeProvider>
                              <AutoComplete
                                  floatingLabelText="Search stock"
+                                 filter={AutoComplete.fuzzyFilter}
                                  onNewRequest={this.handleNewRequest}
                                  openOnFocus={true}
                                  dataSource={this.props.stocks}
