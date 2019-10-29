@@ -41,7 +41,7 @@ class Company extends React.Component {
                     </div>
                 </div> : ''}
                 <div className="row top-offset company-chart">
-                {this.state.chartData.length > 0 ? <TypeChooser>{type => <Chart type={type} data={this.state.chartData} />}</TypeChooser> : ''}
+                {this.state.chartData.length > 0 ? <div className="container"><TypeChooser>{type => <Chart type={type} data={this.state.chartData} />}</TypeChooser></div> : ''}
                 </div>
             </Fragment>
         )

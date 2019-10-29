@@ -78,3 +78,8 @@
 @media screen and (min-width: 768px) {
   .reactjs-app.container{padding:0;}
 }
+
+@media screen and (max-width: 768px) {
+  nav .container-fluid .navbar-header{margin-left:0;}
+}
+
